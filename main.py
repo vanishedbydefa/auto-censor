@@ -1,11 +1,7 @@
 import threading
 import itertools
-import argparse
-import signal
 import queue
 import time
-import sys
-import os
 
 from censor import draw_rectangle, blur_region, mosaic_region, draw_rectangle_with_text
 from helper import find_nudity, get_files
@@ -113,7 +109,7 @@ def censor_manager(img_queue:queue, to_censors:list, method:str):
                 censored = True
                 box = nudity["box"]
                 if method == "rectangle":
-                    draw_rectangle_with_text(img_path, box[0], box[1], box[2], box[3])
+                    draw_rectangle(img_path, box[0], box[1], box[2], box[3])
                 elif method == "blur":
                     blur_region(img_path, box[0], box[1], box[2], box[3])
                 elif method == "mosaic":
