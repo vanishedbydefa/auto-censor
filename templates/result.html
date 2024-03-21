@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #eee;
+            text-align: center;
+        }
+        .container {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #2b2b2b;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            color: #4CAF50;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #ccc;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Result</h1>
+        <p><strong>All images:</strong> {{ all_images }}</p>
+        <p><strong>Detected images:</strong> {{ detected_images }}</p>
+        <p><strong>Censored images</strong> {{ censored_images }}</p>
+    </div>
+</body>
+</html>

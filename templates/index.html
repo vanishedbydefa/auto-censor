@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Censor</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #111;
+            color: #ddd;
+        }
+        .container {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 50px;
+        }
+        #progress-bar {
+            width: 100%;
+            background-color: #333;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        #progress {
+            width: 0%;
+            height: 30px;
+            background-color: #4caf50;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .start-button, .stop-button {
+            text-align: center;
+            background-color: #4caf50; /* Green by default */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px; /* Add some spacing between buttons */
+        }
+
+        .stop-button {
+            background-color: #f44336; /* Red color */
+        }
+
+    /* Style the slider container */
+    .slider-container {
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    /* Style the slider */
+    input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 25px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        border-radius: 5px;
+    }
+
+    /* Style the slider thumb */
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 45px;
+        height: 25px;
+        background: #4CAF50;
+        cursor: pointer;
+        border-radius: 15%;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        background: #4CAF50;
+        cursor: pointer;
+        border-radius: 50%;
+    }
+
+    /* Style the selected value */
+    .selected-value {
+        margin-top: 10px;
+        font-size: 20px;
+    }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Auto Censor</h1>
+        <form action="/start-censoring" method="post">
+            <div class="form-group">
+                <b><label for="gender">Gender:</label></b><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="male" name="gender" value="MALE">
+                    <label class="form-check-label" for="male">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="female" name="gender" value="FEMALE">
+                    <label class="form-check-label" for="female">Female</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <b><label for="exposure">Exposure:</label></b><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="exposed" name="exposure" value="EXPOSED">
+                    <label class="form-check-label" for="exposed">Exposed</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="covered" name="exposure" value="COVERED">
+                    <label class="form-check-label" for="covered">Covered</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <b><label for="body_part">Body Parts:</label></b><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="breast" name="body_part" value="BREAST">
+                    <label class="form-check-label" for="breast">Breast</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="belly" name="body_part" value="BELLY">
+                    <label class="form-check-label" for="BELLY">Belly</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="genitalia" name="body_part" value="GENITALIA">
+                    <label class="form-check-label" for="genitalia">Genitalia</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="buttocks" name="body_part" value="BUTTOCKS">
+                    <label class="form-check-label" for="buttocks">Buttocks</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="feet" name="body_part" value="FEET">
+                    <label class="form-check-label" for="feet">Feet</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <b><label for="face">Face:</label></b><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="face" name="face" value="true">
+                    <label class="form-check-label" for="face">Yes</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <b><label for="recursive">Recursive:</label></b><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="recursive" name="recursive" value="true">
+                    <label class="form-check-label" for="recursive">Yes</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="method">Method:</label>
+                <select class="form-control" id="method" name="method">
+                    <option value="rectangle">Rectangle</option>
+                    <option value="blur">Blur</option>
+                    <option value="mosaic">Mosaic</option>
+                    <option value="rectangle_text_blacked">Rectangle(Text=BLACKED)[Experimental]</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <b><label for="path">Path:</label></b>
+                <input type="text" class="form-control" id="path" name="path">
+            </div>
+            <div class="form-group">
+                <div class="slider-container">
+                    <input type="range" id="threads" name="threads" min="1" max="8" value="4" oninput="updateValue(this.value)">
+                    <div class="selected-value">Threads: <span id="selected-value">4</span></div>
+                </div>
+            </div>
+            <button type="submit" class="start-button">Start Censoring</button>
+        </form>
+        <form action="/stop-censoring" method="post">
+            <button type="submit" class="stop-button" >Stop Censoring</button>
+        </form>
+        <h1>Image Processing Progress</h1>
+        <div id="progress-bar">
+            <div id="progress">0%</div>
+        </div>
+    </div>
+    <script>
+        // Function to update the selected value display
+        function updateValue(value) {
+            document.getElementById("selected-value").textContent = value;
+        }
+
+        // Function to update the progress bar
+        function updateProgressBar() {
+            // Make an AJAX request to fetch the progress from the server
+            fetch('/progress')
+                .then(response => response.json())
+                .then(data => {
+                    // Update the progress bar width and text
+                    const progress = document.getElementById('progress');
+                    const progressBar = document.getElementById('progress-bar');
+                    progress.style.width = data.progress + '%';
+                    progress.textContent = data.progress + '%';
+                    
+                    // Check if processing is complete
+                    if (data.progress >= 100) {
+                        progressBar.style.backgroundColor = '#4caf50'; // Change color to green
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Update progress bar every 1 second
+        setInterval(updateProgressBar, 1000);
+    </script>
+</body>
+</html>

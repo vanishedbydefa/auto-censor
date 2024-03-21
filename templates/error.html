@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error 404 - Page Not Found</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #eee;
+            text-align: center;
+        }
+        .error-container {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #2b2b2b;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            color: #e57373;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #ccc;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        img {
+            width: 300px;
+        }
+        .toggle-darkmode {
+            margin-top: 20px;
+        }
+        .darkmode-text {
+            color: #ccc;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1>Oops! An Error occured</h1>
+        <p><strong>Error:</strong> {{ error }}</p>
+        <p>Don't worry, I'm here to help you find your way back.</p>
+        <a href="/" style="text-decoration: none; color: #e57373; font-size: 1.2em;">Go Back</a>
+    </div>
+
+</body>
+</html>
