@@ -9,7 +9,12 @@ You can than start the censor process, see it's progress and also stop it.
 ### .EXE
 1. Download the .exe file from  the [latest release](https://github.com/vanishedbydefa/auto-censor/releases)
 2. Run it by double clicking the icon.
-3. INFO: Windows may throw an error message because the exe has an "unknown vendor". This is perfectly fine and nothing to worry about.
+3. INFO: Windows Defender may pop up a [blue screen](https://raw.githubusercontent.com/vanishedbydefa/auto-censor/main/images/windows_defender_message.jpeg) because the exe has an "unknown vendor".
+   * This is perfectly fine and nothing to worry about. Resolve the problem by clicking "More Information" and than click "Run anyway".
+     * If you don't trust me you can verify there is nothing bad in the exe by:
+     1. Check the code for anything malicious.
+     2. Compile the code to an exe, using the commands from [dev notes](https://github.com/vanishedbydefa/auto-censor/blob/main/dev_notes.md).
+     3. Compare the SHA512 sum of the resulting exe with the hash from the latest release.
 
 ### CLI
 1. Clone the repository by either using `git clone https://github.com/vanishedbydefa/auto-censor.git` or clicking on the green Button "Code" -> "Download ZIP"
