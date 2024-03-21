@@ -1,7 +1,7 @@
 # Auto Censor
 Auto Censor is a simple solution to censor your porn collection. Auto Censor spins up a webserver and provides you with a simple interface for the censor configuration.
-You can than start the censor process, see it's progress and also stop it. Because Auto Censor isn't just some kinky fun software, there are no backups of your media.
-Auto Censor will overwrite your images based on your configurations.
+You can than start the censor process, see it's progress and also stop it.
+⚠️⚠️⚠️Because Auto Censor isn't just some kinky fun software, there are no backups of your media. Auto Censor will overwrite your images based on your configurations. ⚠️⚠️⚠️
 
 <img src="images/gui.PNG"/>
 
