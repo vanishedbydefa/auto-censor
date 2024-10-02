@@ -44,15 +44,22 @@ def draw_rectangle_with_text(image_path, x, y, width, height, color="black", tex
     # Set default font if not provided
     if font is None:
         font = ImageFont.load_default()
+    else:
+        # Dynamically calculate fontsize based on width and height
+        fontsize = int(min(width, height) * 0.5)  # 20% of the smaller dimension
+        font = ImageFont.truetype(ImageFont.load_default(), fontsize)  # Create the font with calculated size
 
     # Draw text
-    draw.text((text_x, text_y), text, fill=text_color, font=font, anchor="mm")
+    fontsize = min(width, height) * 0.5  # 20% of the smaller dimension
+
+    print(fontsize)
+    draw.text((text_x, text_y), text, fill=text_color, font=font, anchor="mm", fontsize=fontsize)
 
     # Save the modified image
     img.save(image_path)
 
 
-def blur_region(image_path, x, y, width, height, blur_radius=10, overwrite=False):
+def blur_region(image_path, x, y, width, height, blur_radius=30, overwrite=False):
     # Open the image
     img = Image.open(image_path)
 
