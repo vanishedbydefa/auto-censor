@@ -1,6 +1,6 @@
 import webbrowser
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 from threading import Timer
 
 from main import main, calculate_progress, set_stop_threads
@@ -9,7 +9,7 @@ from main import prepare_parameters, reset_img_counter
 def create_flask_app():
     app = Flask(__name__)
 
-    @app.route('/')
+    @app.route('/', methods=['GET'])
     def index():
         return render_template('index.html')
 
@@ -19,7 +19,7 @@ def create_flask_app():
         reset_img_counter()
         return render_template('index.html')
 
-    @app.route('/progress')
+    @app.route('/progress', methods=['GET'])
     def progress():
         # You need to calculate the progress of your image processing function
         # Replace this with your actual progress calculation
@@ -50,6 +50,11 @@ def create_flask_app():
 
         return render_template('result.html', all_images=all_images, detected_images=detected_images, censored_images=censored_images)
     
+    @app.route('/favicon.ico', methods=['GET'])
+    def favicon():
+        return send_from_directory(app.root_path, 'icon.png', mimetype='image/vnd.microsoft.icon')
+
+
     return app
 
 def open_browser():
